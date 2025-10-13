@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Render is live</title>
+  <meta name="description" content="A simple status page indicating that Render is live." />
+  <meta name="theme-color" content="#10b981" />
+  <style>
+    :root {
+      --bg-start: #0f172a;  /* slate-900 */
+      --bg-end: #111827;    /* gray-900 */
+      --accent: #10b981;    /* emerald-500 */
+      --text: #e5e7eb;      /* gray-200 */
+      --muted: #94a3b8;     /* slate-400 */
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+
+    body {
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      background: radial-gradient(1200px 800px at 50% 0%, #0b1220 0%, var(--bg-start) 40%, var(--bg-end) 100%);
+      color: var(--text);
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+
+    .status-card {
+      --shadow: 0 10px 30px rgba(0,0,0,0.35), 0 1px 0 rgba(255,255,255,0.03) inset;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 28px 32px;
+      border-radius: 16px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+    }
+
+    .dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow:
+        0 0 0 4px rgba(16,185,129,0.15),
+        0 0 18px rgba(16,185,129,0.8);
+      position: relative;
+      flex: 0 0 14px;
+    }
+
+    .dot::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      animation: pulse 1.8s ease-out infinite;
+      box-shadow: 0 0 0 0 rgba(16,185,129,0.35);
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(16,185,129,0.35); }
+      70% { box-shadow: 0 0 0 10px rgba(16,185,129,0); }
+      100% { box-shadow: 0 0 0 0 rgba(16,185,129,0); }
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 44px);
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.35);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      white-space: nowrap;
+    }
+
+    .subtext {
+      font-size: 14px;
+      color: var(--muted);
+      margin-top: 6px;
+      text-align: left;
+    }
+
+    .stack {
+      display: flex;
+      flex-direction: column;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .dot::after {
+        animation: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="status-card" role="status" aria-live="polite" aria-label="Render is live">
+    <span class="dot" aria-hidden="true"></span>
+    <div class="stack">
+      <h1>Render is live</h1>
+      <div class="subtext">Everything looks good to go.</div>
+    </div>
+  </div>
+</body>
+</html>
